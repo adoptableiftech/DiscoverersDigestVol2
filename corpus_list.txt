@@ -1,0 +1,38 @@
+1. Get a list of links from the main acropolis page:
+
+lynx -listonly -nonumbers -dump https://en.wikipedia.org/wiki/Acropolis_of_Athens
+1.5 w3m is better at converting html to text:
+  http://www.microhowto.info/howto/convert_from_html_to_formatted_plain_text.html
+2. Groom The List (foreign lang links, top links, etc.)
+cat link1.txt | grep -v 'Special:' > link2.txt
+2.5 found there is a ton of links to reference material from other sources including google books
+2.75 "What links here" page:
+    https://en.wikipedia.org/wiki/Special:WhatLinksHere/Acropolis_of_Athens
+3. Grab the text
+counter=0
+
+           cat ./link3.txt | while read link
+           do
+             w3m -dump $link > $counter.txt
+             (( counter=counter+1 ))
+           done
+
+4. Prune the results
+5. Install NLTK/Gensim
+
+
+Wikipedia Extractor
+https://github.com/bwbaugh/wikipedia-extractor.git
+
+https://en.wikipedia.org/wiki/Parthenon
+https://en.wikipedia.org/wiki/Old_Temple_of_Athena
+https://en.wikipedia.org/wiki/Erechtheum
+https://en.wikipedia.org/wiki/Athena_Promachos
+https://en.wikipedia.org/wiki/Propylaea
+https://en.wikipedia.org/wiki/Temple_of_Athena_Nike
+https://en.wikipedia.org/wiki/Eleusinion
+https://en.wikipedia.org/wiki/Brauroneion
+https://en.wikipedia.org/wiki/Chalkotheke
+https://en.wikipedia.org/wiki/Pandroseion
+https://en.wikipedia.org/wiki/Arrephorion
+https://en.wikipedia.org/wiki/Sanctuary_of_Zeus_Polieus

@@ -1,0 +1,326 @@
+* Corpus Building
+**  What's a corpus?
+*** A 'corpus' is simply a processed "big bag of words" who's content is processed to remove (depending on method) html markup, connecting words (a, and, the, etc.)
+** Parts-of-Speech tagging
+*** Used as input to word2vec
+** What's a Vector
+*** model.most_similiar(queen)
+
+Steps:
+  1. 
+  1. Parsey Mcparseface
+  1. word2vec
+NOTE: pip google-scholar-scraper for getting papers on subject?
+
+#+BEGIN_QUOTE
+Gensim is a free Python library designed to automatically extract semantic topics from documents, as efficiently (computer-wise) and painlessly (human-wise) as possible.
+
+Gensim is designed to process raw, unstructured digital texts (“plain text”).
+
+The algorithms in Gensim, such as Word2Vec, FastText, Latent Semantic Analysis (LSI, LSA, see LsiModel), Latent Dirichlet Allocation (LDA, see LdaModel) etc, automatically discover the semantic structure of documents by examining statistical co-occurrence patterns within a corpus of training documents. These algorithms are unsupervised, which means no human input is necessary – you only need a corpus of plain text documents. 
+#+END_QUOTE
+
+
+* Full Wikipedia Download
+[[https://en.wikipedia.org/wiki/Wikipedia:Database_download#English-language_Wikipedia][Instructions]]: pages-articles-multistream.xml.bz2 – Current revisions only, no talk or user pages; this is probably what you want, and is approximately 14 GB compressed (expands to over 58 GB when decompressed).
+  1. [[http://itorrents.org/torrent/09EED43E8A9C5E086F3728F66F986CFE3B9FD0DD.torrent][articles/multistream torrent]]
+*** saved the torrent file
+**** Be good citizen: use mirror, use torrent
+*** used rtorrent to download [[https://harbhag.wordpress.com/2010/06/30/tutorial-using-rtorrent-on-linux-like-a-pro/][tutorial here]]
+**** takes about three hours
+  2. Import all packages for NLTK
+* install nltk
+* Initialize NLTK
+[[http://sapir.psych.wisc.edu/programming_for_psychologists/cheat_sheets/Text-Analysis-with-NLTK-Cheatsheet.pdf][NLTK Cheat Sheet]]
+[[https://textblob.readthedocs.io/en/dev/advanced_usage.html#advanced][Text Blob adv. usage]]
+#+BEGIN_SRC
+$ python
+>>> import nltk
+>>> nltk.download()
+#+END_SRC
+*  1. Move the Wikipedia articles dump to the corpora directory:
+#+BEGIN_SRC
+$ cd /home/cstevens/nltk_data/corpora/
+$ mkdir wikipedia
+$ cd wikipedia/
+$ mv /home/cstevens/Downloads/enwiki-20170820-pages-articles-multistream.xml.bz2 .
+#+END_SRC
+* Use NLTK
+As just mentioned, a text corpus is a large body of text. 
+* TextBlob?
+
+
+* Create Corpus
+  1. [[https://www.kdnuggets.com/2017/11/building-wikipedia-text-corpus-nlp.html][Check this tutorial]] for creating the corpus this will give you a clean, english plain-text corpus called, 'widi_en.txt'
+
+#+BEGIN_SRC
+python ./make_wiki_corpus.py ./enwiki-20170820-pages-articles-multistream.xml.bz2 wiki_en.txt
+Start time: 16:28
+Processed 4290000 articles
+Processed 4300000 articles
+Processed 4310000 articles
+Processed 4320000 articles
+Processing complete!
+End Time: ~21:00
+#+END_SRC
+
+#+BEGIN_SRC
+$ python ./check_wiki_corpus.py wiki_en.txt
+for instance changes to the original third verse written by bates the song appears in ellen raskin the westing game references further reading collins ace songs sung red white and blue the stories behind america best loved patriotic songs harperresource external links mp and realaudio recordings available at the united states library of congress words sheet music midi file at the cyber hymnal america the beautiful park in colorado springs named for katharine lee bates words archival collection of america the beautiful lantern slides from the another free sheet music
+
+>>> Type 'STOP' to quit or hit Enter key for more <<<
+#+END_SRC
+
+#+BEGIN_QUOTE
+And that's it. Some simple code to accomplish what gensim makes a simple task. Now that you are armed with an ample corpus, the natural language processing world is your oyster. Time for something fun.
+#+END_QUOTE
+
+* Word2vec: creating vectors with gensim
+Tutorial:https://textminingonline.com/training-word2vec-model-on-english-wikipedia-by-gensim 
+
+* Create Vector
+  Create a word vector from the plain-text corpus.
+
+python train_word2vec_model.py:
+#+BEGIN_SRC 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+ 
+import logging
+import os.path
+import sys
+import multiprocessing
+ 
+from gensim.corpora import WikiCorpus
+from gensim.models import Word2Vec
+from gensim.models.word2vec import LineSentence
+ 
+if __name__ == '__main__':
+    program = os.path.basename(sys.argv[0])
+    logger = logging.getLogger(program)
+ 
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s')
+    logging.root.setLevel(level=logging.INFO)
+    logger.info("running %s" % ' '.join(sys.argv))
+ 
+    # check and process input arguments
+    if len(sys.argv) < 4:
+        globals()['__doc__'] % locals()
+        sys.exit(1)
+    inp, outp1, outp2 = sys.argv[1:4]
+ 
+    model = Word2Vec(LineSentence(inp), size=400, window=5, min_count=5,
+            workers=multiprocessing.cpu_count())
+ 
+    # trim unneeded model memory = use(much) less RAM
+    #model.init_sims(replace=True)
+    model.save(outp1)
+    model.wv.save_word2vec_format(outp2, binary=False)
+#+END_SRC
+
+Then execute:
+#+BEGIN_SRC 
+python train_word2vec_model.py wiki_en.txt wiki.en.text.model wiki.en.text.vector
+#+END_SRC
+
+This will initiate the shallow artificial neural network building the word relationships.
+
+The process will take several hours.
+#+BEGIN_SRC 
+2018-09-10 04:38:11,773: INFO: EPOCH - 5 : training on 2376164341 raw words (1926832775 effective words) took 4390.5s, 438861 effective words/s
+2018-09-10 04:38:11,773: INFO: training on a 11880821705 raw words (9634214767 effective words) took 21883.6s, 440248 effective words/s
+2018-09-10 04:38:11,773: INFO: saving Word2Vec object under wiki.en.text.model, separately None
+2018-09-10 04:38:11,773: INFO: storing np array 'vectors' to wiki.en.text.model.wv.vectors.npy
+2018-09-10 04:38:14,323: INFO: not storing attribute vectors_norm
+2018-09-10 04:38:14,324: INFO: storing np array 'syn1neg' to wiki.en.text.model.trainables.syn1neg.npy
+2018-09-10 04:38:18,332: INFO: not storing attribute cum_table
+2018-09-10 04:38:21,638: INFO: saved wiki.en.text.model
+#+END_SRC
+
+Three new files are present (note the original, 'wiki_en.txt' is still present)
+#+BEGIN_SRC 
+-rw-r--r--  1 cstevens users  3515496128 Sep 10 04:38 wiki.en.text.model.wv.vectors.npy
+-rw-r--r--  1 cstevens users  3515496128 Sep 10 04:38 wiki.en.text.model.trainables.syn1neg.npy
+-rw-r--r--  1 cstevens users   145200014 Sep 10 04:38 wiki.en.text.model
+#+END_SRC
+
+* Tag Corpus with Parts of Speech
+From [[https://github.com/danielricks/scholar][scholar]] The available methods using the full pos-tagged corpus are demonstrated below. Some methods require a pos-tag, and some of them don't
+
+
+#+BEGIN_SRC 
+python -m gensim.scripts.make_wiki ./enwiki-20170820-pages-articles-multistream.xml.bz2 ./wiki_gensim.txt
+#+END_SRC
+
+* starting over
+#+BEGIN_QUOTE
+This pre-processing step makes two passes over the 8.2GB compressed wiki dump (one to extract the dictionary, one to create and store the sparse vectors) and takes about 9 hours on my laptop, so you may want to go have a coffee or two.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+If you have the pattern package installed, this module will use a fancy lemmatization to get a lemma of each token (instead of plain alphabetic tokenizer).
+#+END_QUOTE
+
+Convert the articles to plain text (process Wiki markup) and store the result as sparse TF-IDF vectors. In Python, this is easy to do on-the-fly and we don’t even need to uncompress the whole archive to disk. There is a script included in gensim that does just that
+
+* Thinking about Words
+** NLTK concordance: where does word appear in corpus in context
+#+BEGIN_SRC 
+hamlet.concordance("king",55, lines=10)
+#+END_SRC
+** What words are similiar to keyword?
+#+BEGIN_SRC 
+word=print(hamlet.similar("marriage"))
+#+END_SRC
+NOTE: can do similiar smarter with ngram, etc.
+** If we do have similarity, can we go backwards and find similiarity in context?
+#+BEGIN_SRC 
+hamlet.common_contexts(["king","father"])
+
+Hadupe/baleen for getting corpus material
+
+#+END_SRC
+* Building Relationships
+** ultimately, that's what these models do
+** Boat, ocean, sand, beach, seafood, crab, steamed
+
+
+* LSA/LDA Modelling in Gensim
+Source Document: https://radimrehurek.com/gensim/wiki.html
+#+BEGIN_SRC 
+# enable lemming tagging
+sudo pip install pattern
+
+# Handy script for processing Wikipedia Corpus (about six hour run time)
+$ python -m gensim.scripts.make_wiki ./enwiki-20170820-pages-articles-multistream.xml.bz2 ./wiki_gensim.txt
+
+starttime:2018-09-08 10:44:16 
+2018-09-08 16:34:55,287 : INFO : PROGRESS: saving document #4320000
+2018-09-08 16:34:56,192 : INFO : saved 4323189x100000 matrix, density=0.157% (678767189/432318900000)
+2018-09-08 16:34:56,195 : INFO : saving MmCorpus index to ./wiki_gensim.txt_tfidf.mm.index
+2018-09-08 16:34:56,438 : INFO : finished running make_wiki.py
+#+END_SRC
+
+Create this script to test:
+#+BEGIN_SRC 
+import logging, gensim
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+# load id->word mapping (the dictionary), one of the results of step 2 above
+id2word = gensim.corpora.Dictionary.load_from_text('wiki_gensim.txt_wordids.txt.bz2')
+# load corpus iterator
+mm = gensim.corpora.MmCorpus('wiki_gensim.txt_tfidf.mm')
+# mm = gensim.corpora.MmCorpus('wiki_en_tfidf.mm.bz2') # use this if you compressed the TFIDF output (recommended)
+
+print(mm)
+#+END_SRC
+#+BEGIN_SRC 
+$ python lsa.py
+2018-09-09 09:24:26,273 : INFO : loaded corpus index from wiki_gensim.txt_tfidf.mm.index
+2018-09-09 09:24:26,273 : INFO : initializing cython corpus reader from wiki_gensim.txt_tfidf.mm
+2018-09-09 09:24:26,273 : INFO : accepted corpus with 4323189 documents, 100000 features, 678767189 non-zero entries
+MmCorpus(4323189 documents, 100000 features, 678767189 non-zero entries)
+#+END_SRC
+
+It works!
+We can see that our corpus contains 4.3M documents, 100K fiatures (distinct tokens) and 0.68G non-zero entries in the spars TF-IDF matrix.
+
+* Similarities
+
+#+BEGIN_SRC 
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from gensim import corpora, models, similarities, logging
+# >>> import logging, gensim
+>>> logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+>>> dictionary = gensim.corpora.Dictionary.load_from_text('wiki_gensim.txt_wordids.txt.bz2')
+>>> corpus = corpora.MmCorpus('wiki_gensim.txt_tfidf.mm')
+>>> mm = gensim.corpora.MmCorpus('wiki_gensim.txt_tfidf.mm')
+2018-09-10 09:09:10,483 : INFO : loaded corpus index from wiki_gensim.txt_tfidf.mm.index
+2018-09-10 09:09:10,484 : INFO : initializing cython corpus reader from wiki_gensim.txt_tfidf.mm
+2018-09-10 09:09:10,484 : INFO : accepted corpus with 4323189 documents, 100000 features, 678767189 non-zero entries
+>>> print(mm)
+MmCorpus(4323189 documents, 100000 features, 678767189 non-zero entries)
+>>> lsi = models.LsiModel(mm, id2word=dictionary, num_topics=2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'models' is not defined
+>>> lsi = models.LsiModel(corpus, id2word=dictionary, num_topics=2)
+>>> doc = "acropolis"
+>>> vec_bow = dictionary.doc2bow(doc.lower().split())
+>>> vec_lsi = lsi[vec_bow] # convert the query to LSI space
+>>> print(vec_lsi)
+[(0, 0.00036493386351872057), (1, 0.0001741344991057044)]
+>>> index = similarities.MatrixSimilarity(lsi[mm]) # transform corpus to LSI space and index it
+>>> index.save('/tmp/wikipedia.index')
+2018-09-10 10:43:09,535 : INFO : saving MatrixSimilarity object under /tmp/wikipedia.index, separately None
+2018-09-10 10:43:09,709 : INFO : saved /tmp/wikipedia.index
+>>> index = similarities.MatrixSimilarity.load('/tmp/wikipedia.index')
+2018-09-10 10:43:45,125 : INFO : loading MatrixSimilarity object from /tmp/wikipedia.index
+2018-09-10 10:43:45,263 : INFO : loaded /tmp/wikipedia.index
+>>> sims = index[vec_lsi] # perform a similarity query against the corpus
+>>> print(list(enumerate(sims))) # print (document_number, document_similarity) 2-tuples
+>>> #prints long list
+>>> sims = sorted(enumerate(sims), key=lambda item: -item[1])
+
+
+#+END_SRC
+
+DCS After an hour or two, run the following:
+#+BEGIN_SRC 
+
+#+END_SRC
+Here's the output:
+k
+----------- Old ------
+* Gensim
+Closest word to "King?"
+** Attribute (WordRank)
+*** King: throne, kings, crowned, monarch
+** Intercangeable (Word2Vec)
+*** King: Eochaid, Canute, Moarmaer, Capet
+** Both (FastText)
+*** King: thrones, son, Godred, Therion
+
+Nice graphs: to Gensiboard
+% in Gensim
+\texttt{atributes_of_model.most_similar(u'darcy')}
+\texttt{interchangeable_words_model.most_similar(u'darcy')}
+
+1. Get a list of links from the main acropolis page:
+
+lynx -listonly -nonumbers -dump https://en.wikipedia.org/wiki/Acropolis_of_Athens
+1.5 w3m is better at converting html to text:
+  http://www.microhowto.info/howto/convert_from_html_to_formatted_plain_text.html
+2. Groom The List (foreign lang links, top links, etc.)
+cat link1.txt | grep -v 'Special:' > link2.txt
+2.5 found there is a ton of links to reference material from other sources including google books
+2.75 "What links here" page:
+    https://en.wikipedia.org/wiki/Special:WhatLinksHere/Acropolis_of_Athens
+3. Grab the text
+counter=0
+
+           cat ./link3.txt | while read link
+           do
+             w3m -dump $link > $counter.txt
+             (( counter=counter+1 ))
+           done
+
+4. Prune the results
+5. Install NLTK/Gensim
+
+
+Wikipedia Extractor
+https://github.com/bwbaugh/wikipedia-extractor.git
+
+https://en.wikipedia.org/wiki/Parthenon
+https://en.wikipedia.org/wiki/Old_Temple_of_Athena
+https://en.wikipedia.org/wiki/Erechtheum
+https://en.wikipedia.org/wiki/Athena_Promachos
+https://en.wikipedia.org/wiki/Propylaea
+https://en.wikipedia.org/wiki/Temple_of_Athena_Nike
+https://en.wikipedia.org/wiki/Eleusinion
+https://en.wikipedia.org/wiki/Brauroneion
+https://en.wikipedia.org/wiki/Chalkotheke
+https://en.wikipedia.org/wiki/Pandroseion
+https://en.wikipedia.org/wiki/Arrephorion
+https://en.wikipedia.org/wiki/Sanctuary_of_Zeus_Polieus

@@ -1,0 +1,65 @@
+// To run w/ SVG output: dot -Tsvg -o [output file] [input file]
+// Example: dot -Tsvg -o relation_graph.svg relationships.dot
+digraph {
+    graph [pad="0.5", nodesep="0.5", ranksep="2"];
+    node [shape=plain]
+    rankdir=LR;
+
+Realism [label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i>Realism</i></td></tr>
+  <tr><td><i>In Platonic realism,<br/>
+forms are related to particulars<br/>
+ (instances of objects and properties)<br/>
+ in that a particular is regarded as a<br/>
+ copy of its form</i></td></tr> 
+</table>>];
+
+Ontology [label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i>Ontology</i></td></tr>
+<tr><td><i>This view allows philosophical entities<br/>
+other than actual entities to<br/>
+really exist, but not as <br/>
+fundamentally and primarily<br/>
+factual or causally efficacious;<br/>
+they have existence as<br/>
+abstractions, with reality only<br/>
+derived from their reference<br/>
+ to actual entities.</i></td></tr>
+</table>>];
+
+Indeterminacy [label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i>Ineterminacy</i></td></tr>
+<tr><td><i>Science generally attempts<br/>
+ to eliminate vague definitions, causally <br/>
+inert entities, and indeterminate properties, <br/>
+via further observation, experimentation, <br/>
+characterization, and explanation.<br/>
+Chaos theory argues that precise prediction <br/>
+of the behavior of complex systems becomes<br/>
+impossible because of the observer's inability<br/>
+to gather all necessary data.
+</i></td></tr>
+</table>>];
+
+Foucault[label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i>Foucault</i></td></tr>
+<tr><td><i>Foucault argues that the <br/>
+contemporary study of the history of<br/>
+ ideas, although it targets moments<br/>
+ of transition between historical<br/>
+ worldviews, ultimately depends on<br/>
+ continuities that break down under <br/>
+close inspection.
+</i></td></tr>
+</table>>];
+
+
+Realism -> Ontology;
+Realism -> Indeterminacy;
+Foucault -> Indeterminacy;
+}
+

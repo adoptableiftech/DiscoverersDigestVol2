@@ -1,0 +1,10 @@
+PWD /home/cstevens/doc/disc_digest_vol_2
+INPUT /usr/local/texlive/2018/texmf.cnf
+INPUT /usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2018/texmf-var/web2c/xetex/xelatex.fmt
+INPUT epilogue.tex
+OUTPUT epilogue.log
+INPUT /usr/local/texlive/2018/texmf-dist/tex/latex/lm/ot1lmr.fd
+INPUT /usr/local/texlive/2018/texmf-dist/tex/latex/lm/ot1lmr.fd
+INPUT /usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm

@@ -1,0 +1,27 @@
+\changetocdepth {0}
+\contentsline {chapter}{\chapternumberline {1}New Horizons\\ \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Artificial Intelligence For Engaging World Models}}{4}{chapter.1}
+\contentsline {section}{\numberline {}socratic method of immersion}{5}{section.1.1}
+\contentsline {subsection}{make it good}{5}{section*.4}
+\contentsline {subsection}{the struggle eternal}{7}{section*.5}
+\contentsline {subsection}{critical non\textendash acclaim}{8}{section*.6}
+\contentsline {subsection}{critical constructs}{10}{section*.7}
+\contentsline {subsection}{nuts and bolts}{10}{section*.8}
+\contentsline {chapter}{\chapternumberline {2}Narrative Intelligence\\ \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Creating Responsive IF Using NLTK}}{14}{chapter.2}
+\contentsline {section}{\numberline {}a time and a place}{15}{section.2.1}
+\contentsline {section}{\numberline {}saving mimesis}{18}{section.2.2}
+\contentsline {section}{\numberline {}installation}{19}{section.2.3}
+\contentsline {subsection}{installing python}{19}{section*.11}
+\contentsline {subsection}{installing nltk}{20}{section*.12}
+\contentsline {section}{\numberline {}running queries}{21}{section.2.4}
+\contentsline {section}{\numberline {}divide and conquer}{22}{section.2.5}
+\contentsline {chapter}{\chapternumberline {3}Topic Modeling\\ \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Finding Related Topics For Your World Using Gensim}}{25}{chapter.3}
+\contentsline {section}{\numberline {}relationships to diagrams}{26}{section.3.1}
+\contentsline {section}{\numberline {}topic modeling preparation}{31}{section.3.2}
+\contentsline {subsection}{installing prerequisites}{31}{section*.20}
+\contentsline {subsection}{good citizenry: downloading wikipedia}{32}{section*.21}
+\contentsline {subsection}{downloading from a mirror}{32}{section*.22}
+\contentsline {subsection}{installing wiki\textendash sim\textendash search}{32}{section*.23}
+\contentsline {chapter}{\chapternumberline {4}Epilogue\\ \relax \fontsize {9}{11}\selectfont \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Standing On The Shoulders of Giants}}{36}{chapter.4}
+\contentsline {section}{\numberline {}peter m.j. gross: they don't come better}{37}{section.4.1}
+\contentsline {section}{\numberline {}coming up}{37}{section.4.2}
+\contentsline {chapter}{\chapternumberline {5}Notes}{38}{chapter.5}

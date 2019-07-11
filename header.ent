@@ -1,0 +1,30 @@
+\pagenotesubhead{Chapter}{1}{New Horizons\protect \\ \relax \protect \fontsize  {9}{11}\protect \selectfont  \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Artificial Intelligence For Engaging World Models}}
+\startnoteentry{0}
+{Page \pageref{img:kasparov} World Champion Gary Kasparov}
+{pagenote1-5}
+{}
+Gary
+Kasparov
+image
+Copyright
+2007,
+S.M.S.I.,
+Inc.
+–
+Owen
+Williams,
+\href{http://www.kasparovagent.com/photo_gallery.php}{The
+Kasparov
+Agency},
+\href{https://commons.wikimedia.org/w/index.php?curid=4507357}{CC
+BY-SA
+3.0}
+\endnoteentry
+\pagenotesubhead{Chapter}{3}{Topic Modeling\protect \\ \relax \protect \fontsize  {9}{11}\protect \selectfont  \abovedisplayskip 8.5\p@ plus3\p@ minus4\p@ \abovedisplayshortskip \z@ plus2\p@ \belowdisplayshortskip 4\p@ plus2\p@ minus2\p@ \def \leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep {\leftmargin \leftmargini \topsep 4\p@ plus2\p@ minus2\p@ \parsep 2\p@ plus\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {Finding Related Topics For Your World Using Gensim}}
+\startnoteentry{0}
+{Page \pageref{lst:relationships}, Graphiz relationship graph code listing}
+{pagenote2-29}
+{}
+\hypertarget{lst:relationships}{\lstinputlisting{media/images/relationships.dot}}
+
+\endnoteentry
